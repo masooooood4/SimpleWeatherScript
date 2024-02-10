@@ -1,8 +1,8 @@
 from data import WEATHER_DATA
 
 def get_weather(city):
-
-    return WEATHER_DATA.get(city.title(),"no data available for this city")
+    data = WEATHER_DATA.get(city.title(),"no data available for this city")
+    return data["temperature"] , data["condition"]
 
 def get_recomendation(condition):
     if condition =="rainy":
@@ -12,12 +12,14 @@ def get_recomendation(condition):
     else:
         return "have a great day"
 
+def present_info(name,temp,condition):
+    print(f" in {name}, current temprature is : {temp} and the condition is : {condition}")
+    
 
 def main():
     city = input("enter the name of the city to get its current weather: ")
-    weather = get_weather(city)
-    print(weather)
-    print(f"weather in {city.title()}: {weather}")
+    temp,condition = get_weather(city)
+    present_info(city,temp,condition)
 
 if __name__ == "__main__":
     main()
